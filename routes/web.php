@@ -1,4 +1,4 @@
-// File: routes/web.php
+
 <?php
 
 use App\Http\Controllers\BookController;
