@@ -77,6 +77,30 @@
             margin-bottom: 16px;
         }
 
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #78350f;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
         .btn {
             display: inline-block;
             padding: 6px 14px;

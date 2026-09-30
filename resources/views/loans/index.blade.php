@@ -33,8 +33,26 @@
             </td>
             <td>{{ $loan['tanggal_pinjam'] }}</td>
             <td>{{ $loan['tanggal_kembali'] }}</td>
-            <td>{{ ucfirst($loan['status']) }}</td>
             <td>
+                @if($loan['status'] === 'dipinjam')
+                <span class="badge-success">{{ ucfirst($loan['status']) }}</span>
+                @endif
+                @if($loan['status'] === 'dikembalikan')
+                <span class="badge-warning"> {{ ucfirst($loan['status']) }}</span>
+                @endif
+                @if($loan['status'] === 'terlambat')
+                <span class="badge-danger">{{ ucfirst($loan['status']) }}</span>
+                @endif
+            </td>
+            <td>
+                @if($loan['status'] === 'dipinjam')
+                <form action="{{ route('loans.kembalikan', $loan['id']) }}" method="POST" onclick="return confirm('Apakah Anda yakin ingin mengembalikan peminjaman ini?')">
+                    @csrf
+                    @method('PUT')
+                    <button type="submit">Kembalikan</button>
+                </form>
+                |
+                @endif
                 <a href="{{ route('loans.show', $loan['id']) }}">Detail</a>
                 |
                 <a href="{{ route('loans.edit', $loan['id']) }}">Edit</a>
