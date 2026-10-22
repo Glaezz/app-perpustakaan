@@ -46,3 +46,7 @@ Proyek ini dibuat untuk:
     ```
 
 Pastikan PHP, Composer, Node.js, dan npm sudah terpasang sebelum menjalankan perintah di atas.
+
+## Dokumentasi API
+
+Dokumentasi lengkap seluruh endpoint REST API (`books`, `members`, `loans`, `stats`) beserta contoh response nyata dan status code-nya tersedia di [API.md](./API.md).
