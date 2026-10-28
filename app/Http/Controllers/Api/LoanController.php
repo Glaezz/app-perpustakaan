@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\LoanResource;
 use App\Models\Loan;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Support\Facades\Http;
 
 class LoanController extends Controller
 {
-    // File: app/Http/Controllers/Api/LoanController.php
     public function index()
     {
         $loans = Loan::with(['member', 'user', 'loanItems.book'])->paginate(10);
