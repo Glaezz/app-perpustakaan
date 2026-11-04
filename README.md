@@ -26,23 +26,82 @@ Proyek ini dibuat untuk:
 
 ## Menjalankan Secara Lokal
 
-1. Clone repository dan masuk ke folder proyek.
-2. Install dependensi serta siapkan aplikasi:
+Pastikan PHP 8.2 atau lebih baru, Composer, MySQL, Node.js, dan npm sudah
+terpasang.
 
-    ```bash
-    composer run setup
-    ```
+### 1. Clone repository
 
-3. Jalankan server Laravel dan Vite:
+```bash
+git clone https://github.com/Glaezz/app-perpustakaan.git
+cd app-perpustakaan
+```
 
-    ```bash
-    composer run dev
-    ```
+### 2. Install dependency
 
-4. Buka alamat berikut pada browser:
+```bash
+composer install
+npm install
+```
 
-    ```text
-    http://127.0.0.1:8000
-    ```
+### 3. Setup `.env`
 
-Pastikan PHP, Composer, Node.js, dan npm sudah terpasang sebelum menjalankan perintah di atas.
+Salin file environment contoh, lalu buat application key:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Pada Windows PowerShell, gunakan `Copy-Item .env.example .env` sebagai
+pengganti perintah `cp`.
+
+Buka `.env` dan sesuaikan konfigurasi database MySQL. Contoh konfigurasi yang
+digunakan aplikasi ini:
+
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=db_perpustakaan
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Tambahkan atau pastikan URL API internal berikut tersedia:
+
+```dotenv
+INTERNAL_API_URL=http://127.0.0.1:8011
+```
+
+Buat database `db_perpustakaan` terlebih dahulu di MySQL jika belum ada.
+
+### 4. Migrate dan seed database
+
+```bash
+php artisan migrate --seed
+```
+
+### 5. Jalankan dua server Laravel
+
+Dashboard mengambil statistik dan halaman Laporan mengambil data melalui API
+internal. Karena itu, jalankan dua proses server pada dua terminal berbeda.
+
+**Terminal 1 - aplikasi utama:**
+
+```bash
+php artisan serve --port=8000
+```
+
+**Terminal 2 - server API internal:**
+
+```bash
+php artisan serve --port=8011
+```
+
+Buka aplikasi utama di [http://127.0.0.1:8000](http://127.0.0.1:8000).
+Jangan menutup server pada port `8011` selama menggunakan Dashboard atau
+Laporan.
+
+## Dokumentasi API
+
+Dokumentasi lengkap seluruh endpoint REST API (`books`, `members`, `loans`, `stats`) beserta contoh response nyata dan status code-nya tersedia di [api.md](./api.md).
